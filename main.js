@@ -20,7 +20,9 @@ document.getElementById("src-btn").addEventListener("click", function(){
 function displayData(data) {
   console.log(data)
   document.getElementById("country-name").innerHTML = `${data.name}, ${data.sys.country}`
-  document.getElementById("temp").innerHTML = `${Math.round(data.main.temp)} &deg;C`
+  // document.getElementById("temp").innerHTML = `${Math.round(data.main.temp)} &deg;C`
+  const temp = data.main.temp
+  document.getElementById("temp").innerHTML = temp.toFixed(1) + '&deg;C'
   document.getElementById("weather-el").innerHTML = data.weather[0].main
   
   //weather icon change
