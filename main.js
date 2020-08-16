@@ -20,13 +20,21 @@ document.getElementById("src-btn").addEventListener("click", function(){
 function displayData(data) {
   console.log(data)
   document.getElementById("country-name").innerHTML = `${data.name}, ${data.sys.country}`
-  // document.getElementById("temp").innerHTML = `${Math.round(data.main.temp)} &deg;C`
-  const temp = data.main.temp
-  document.getElementById("temp").innerHTML = temp.toFixed(1) + '&deg;C'
-  document.getElementById("weather-el").innerHTML = data.weather[0].main
   
   //weather icon change
   const iconCode = data.weather[0].icon
-  const iconUrl = "https://openweathermap.org/img/w/" + iconCode + ".png"
+  const iconUrl = "https://openweathermap.org/img/wn/" + iconCode + "@2x.png"
+
+  // document.getElementById("temp").innerHTML = `${Math.round(data.main.temp)} &deg;C`
   document.getElementById("weather-icon").src = iconUrl
+  const temp = data.main.temp
+  const displayTemp = document.getElementById("temp")
+  displayTemp.innerHTML = temp.toFixed(1) + '&deg;C'
+
+  //convert celsius to fahrenheit
+  displayTemp.addEventListener("click", function(){
+    const fahrenheitTemp = temp * 1.8 + 32;
+    displayTemp.innerHTML = fahrenheitTemp.toFixed(1) + '&deg;F'
+  })
+  document.getElementById("weather-el").innerHTML = data.weather[0].main
 }
